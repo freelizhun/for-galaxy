@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lammps-deploy
+  namespace: galaxy2
+  labels:
+    k8s-app: lammps-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: lammps-deploy
+  template:
+    metadata:
+      labels:
+        k8s-app: lammps-deploy
+    spec:
+      containers: 
+      - name: lammps-deploy
+        image: 192.168.108.107:5000/lammps:v7
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: TZ
+          value: Asia/Shanghai
+        command: ["/bin/bash"]
+        args: ["-c","source /etc/profile;tail -f /dev/null"]
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        volumeMounts:
+        - name: data-cache-galaxy
+          mountPath: /test-data
+      volumes: 
+      - name: data-cache-galaxy
+        persistentVolumeClaim:
+          claimName: lammps-galaxy-pvc

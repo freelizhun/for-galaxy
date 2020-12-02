@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-desk-vmd
+  namespace: galaxy2
+  labels:
+    k8s-app: ubuntu-desk-vmd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: ubuntu-desk-vmd
+  template:
+    metadata:
+      labels:
+        k8s-app: ubuntu-desk-vmd
+    spec:
+      containers:
+      - name: ubuntu-desk-vmd
+        image: 192.168.108.107:5000/ubuntu-desktop-vmd:v1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: TZ
+          value: Asia/Shanghai
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 500M
+        volumeMounts:
+        - mountPath: /dev/shm
+          name: dev-shm
+        #- mountPath: /root/Desktop
+        #  name: data-cache
+      volumes:
+      - hostPath:
+          path: /dev/shm
+        name: dev-shm
+      #- name: data-cache
+      #  persistentVolumeClaim:
+      #    claimName: lammps-galaxy-pvc 
