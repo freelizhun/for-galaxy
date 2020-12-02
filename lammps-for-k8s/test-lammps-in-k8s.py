@@ -41,6 +41,7 @@ def exec_commands(api_instance,pod_name,namespace,input_file_name):
     #resp.close()
 
     # Begining to cp files from galaxy-web-*** pod to ubuntu-desk-vmd-*** pod's dst_file
+    '''
     try:
         exec_command_forcp = ["tar", "xvf", "-", "-C", "/"]
         resp_forcp = stream(api_instance.connect_get_namespaced_pod_exec,
@@ -74,6 +75,7 @@ def exec_commands(api_instance,pod_name,namespace,input_file_name):
             resp_forcp.close()
     except ApiException as e:
         print("Exception when copying files from galaxy-web-*** to ubuntu-desk-vmd-*** %s \n" % e)
+    '''
 
 def main():
     if not os.path.exists('/galaxy/server/data-cache'):
