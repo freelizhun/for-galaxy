@@ -1,0 +1,23 @@
+<tool id="file_lammps_content_1" name="vmd 测试" version="0.1.0">
+  <description>对vmd可视化模拟软件测试</description>
+  <command>python3 '${__tool_directory__}/test-vmd-in-k8s.py' '$input' '$output'</command>
+  <inputs>
+    <param format="txt" name="input" type="data" label="输入文件"/>
+  </inputs>
+  <outputs>
+    <data format="txt" name="output" />
+    <data format="txt" name="output2"/>
+  </outputs> 
+
+  <tests>
+    <test>
+      <param name="input" value="file1.txt"/>
+      <output name="out_file1" file="fa_gc_content_output.txt"/>
+    </test>
+  </tests>
+
+  <help>
+该工具用于vmd可视化模拟软件的测试.
+  </help>
+
+</tool>

@@ -1,0 +1,10 @@
+- mountPath: /galaxy/server/data-cache
+  name: data-cache-galaxy
+
+- name: data-cache-galaxy
+  persistentVolumeClaim:
+    claimName: lammps-galaxy-pvc
+
+此处注意，在配置3个pod: galaxy-web,galaxy-job-0,galaxy-workflow的时候，
+galaxy-job-0中只要galaxy-data有的地方，data-cache-galaxy也要配，不然会报错。
+galaxy-web,galaxy-workflow只需配置到image为galaxy/galaxy-k8s:20.05的地方。

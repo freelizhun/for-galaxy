@@ -1,0 +1,26 @@
+<tool id="file_lammps_content_1" name="lammps 测试" version="0.1.0">
+  <requirements>
+    <requirement type="package" version="12.0.1">kubernetes</requirement>
+  </requirements>
+  <description>对lammps数值模拟软件测试</description>
+  <command>/galaxy/server/.venv/bin/python '${__tool_directory__}/test-lammps-in-k8s.py' '$input' '$output' '$output2'</command>
+  <inputs>
+    <param format="txt" name="input" type="data" label="输入文件"/>
+  </inputs>
+  <outputs>
+    <data format="txt" name="output" />
+    <data format="txt" name="output2"/>
+  </outputs> 
+
+  <tests>
+    <test>
+      <param name="input" value="file1.txt"/>
+      <output name="out_file1" file="fa_gc_content_output.txt"/>
+    </test>
+  </tests>
+
+  <help>
+该工具用于lammps数值模拟软件的测试.
+  </help>
+
+</tool>
