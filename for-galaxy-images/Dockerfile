@@ -5,4 +5,5 @@ COPY ./test-vmd-in-k8s.py tools/mytools
 COPY ./toolExample-lammpstest-in-k8s.xml tools/mytools  
 COPY ./toolExample-vmdtest-in-k8s.xml tools/mytools
 COPY ./dependency_resolvers_conf.xml config/
+COPY ./tool_sheds_conf.xml config/
 RUN pip install kubernetes -i https://pypi.tuna.tsinghua.edu.cn/simple/
