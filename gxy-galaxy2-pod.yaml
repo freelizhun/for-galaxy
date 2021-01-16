@@ -1,0 +1,258 @@
+[root@master3 for-galaxy-images]# kubectl -n galaxy2 get pods gxy-galaxy2-49-6e47c861-a08e-45d6-be3b-d1f0c3f2d116-vqcvb -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2020-12-08T06:02:22Z"
+  generateName: gxy-galaxy2-49-6e47c861-a08e-45d6-be3b-d1f0c3f2d116-
+  labels:
+    app: gxy-galaxy2-49-ecb15ce8-5440-43d6-8358-6d75114
+    controller-uid: ac4abcbe-44d4-42dd-a4df-958391d5f24c
+    job-name: gxy-galaxy2-49-6e47c861-a08e-45d6-be3b-d1f0c3f2d116
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:controller-uid: {}
+          f:job-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"ac4abcbe-44d4-42dd-a4df-958391d5f24c"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity: {}
+        f:containers:
+          k:{"name":"job-container"}:
+            .: {}
+            f:args: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"GALAXY_MEMORY_MB"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"GALAXY_SLOTS"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/galaxy/server/data-cache"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/galaxy/server/database"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+            f:workingDir: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:priorityClassName: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext:
+          .: {}
+          f:fsGroup: {}
+          f:runAsGroup: {}
+          f:runAsUser: {}
+          f:supplementalGroups: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"galaxy2-galaxy-pvc"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+          k:{"name":"lammps-galaxy-pvc"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2020-12-08T06:02:22Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.12.2"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2020-12-08T06:02:25Z"
+  name: gxy-galaxy2-49-6e47c861-a08e-45d6-be3b-d1f0c3f2d116-vqcvb
+  namespace: galaxy2
+  ownerReferences:
+  - apiVersion: batch/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Job
+    name: gxy-galaxy2-49-6e47c861-a08e-45d6-be3b-d1f0c3f2d116
+    uid: ac4abcbe-44d4-42dd-a4df-958391d5f24c
+  resourceVersion: "202161137"
+  selfLink: /api/v1/namespaces/galaxy2/pods/gxy-galaxy2-49-6e47c861-a08e-45d6-be3b-d1f0c3f2d116-vqcvb
+  uid: 54708b0d-7d0d-4b41-94ec-9986fd8488fb
+spec:
+  affinity: {}
+  containers:
+  - args:
+    - -c
+    - /galaxy/server/database/jobs_directory/000/49/galaxy_49.sh
+    command:
+    - /bin/bash
+    env:
+    - name: GALAXY_MEMORY_MB
+      value: "2000"
+    - name: GALAXY_SLOTS
+      value: "1"
+    image: 192.168.108.107:5000/galaxy-k8s-lammpsvmdtools:v7
+    imagePullPolicy: IfNotPresent
+    name: job-container
+    resources:
+      limits:
+        cpu: "2"
+        memory: 5G
+      requests:
+        cpu: "1"
+        memory: 2G
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /galaxy/server/database
+      name: galaxy2-galaxy-pvc
+    - mountPath: /galaxy/server/data-cache
+      name: lammps-galaxy-pvc
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-6qjjx
+      readOnly: true
+    workingDir: /galaxy/server/database/jobs_directory/000/49
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: node13
+  priority: -1000
+  priorityClassName: galaxy2-job-priority
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 101
+    runAsGroup: 101
+    runAsUser: 101
+    supplementalGroups:
+    - 101
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: galaxy2-galaxy-pvc
+    persistentVolumeClaim:
+      claimName: galaxy2-galaxy-pvc
+  - name: lammps-galaxy-pvc
+    persistentVolumeClaim:
+      claimName: lammps-galaxy-pvc
+  - name: default-token-6qjjx
+    secret:
+      defaultMode: 420
+      secretName: default-token-6qjjx
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2020-12-08T06:04:04Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2020-12-08T06:04:06Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2020-12-08T06:04:06Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2020-12-08T06:02:22Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://abe4cf772b671d61fcb2f93ef1baba6e9a9e8770d5240f75dcee584701e33fdf
+    image: 192.168.108.107:5000/galaxy-k8s-lammpsvmdtools:v7
+    imageID: docker-pullable://192.168.108.107:5000/galaxy-k8s-lammpsvmdtools@sha256:ce55d9534b9e1b65228fbe70a0f04ce25029d5e2beadee9c508c524a40f14e81
+    lastState: {}
+    name: job-container
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2020-12-08T06:04:06Z"
+  hostIP: 192.168.108.113
+  phase: Running
+  podIP: 10.244.12.2
+  podIPs:
+  - ip: 10.244.12.2
+  qosClass: Burstable
+  startTime: "2020-12-08T06:04:04Z"
