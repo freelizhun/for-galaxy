@@ -1,0 +1,5 @@
+categories: [Web Services]
+description: test-lammps-in-k8s
+long_description: test lammps in k8s
+name: lammps_k8s
+owner: csc
